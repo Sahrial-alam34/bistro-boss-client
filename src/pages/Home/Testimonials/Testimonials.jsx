@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
+import doubleIcon from '../../../assets/home/doubleComma.png'
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
@@ -35,6 +36,7 @@ const Testimonials = () => {
                                 value={review.rating}
                                 readOnly
                             />
+                            <img className="mt-5" src={doubleIcon} alt="" />
                             <p className="py-8">{review.details}</p>
                             <h3 className="text-2xl text-orange-400">{review.name}</h3>
                         </div>

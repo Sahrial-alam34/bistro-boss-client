@@ -8,7 +8,7 @@ const ChefRecommend = () => {
         fetch('menu.json')
             .then(res => res.json())
             .then(data => {
-                const popularItems = data.filter(item => item.category === 'popular').slice(0,3)
+                const popularItems = data.filter(item => item.category === 'popular').slice(1,4)
                 setMenu(popularItems)
             })
     }, [])
@@ -20,7 +20,7 @@ const ChefRecommend = () => {
             >
 
             </SectionTitle>
-            <div className="card   shadow-xl grid grid-cols-3 gap-5">
+            <div className="card shadow-xl grid grid-cols-3 gap-5">
             {
                     menu.map(item => <SingleChefRecommend
                     key={item._id}

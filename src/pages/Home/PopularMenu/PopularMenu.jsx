@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
+import Contact from "./Contact";
 
 
 const PopularMenu = () => {
@@ -32,6 +33,7 @@ const PopularMenu = () => {
             <div className="flex justify-center">
             <button className="btn btn-outline border-0 border-b-4 mt-4">View Full Menu</button>
             </div>
+            <Contact></Contact>
         </section>
     );
 };
