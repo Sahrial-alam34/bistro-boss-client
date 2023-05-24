@@ -4,10 +4,10 @@ const SingleChefRecommend = ({ item }) => {
     console.log(item)
     const { name, image, recipe } = item;
     return (
-        <div className="bg-base-200">
+        <div className="bg-base-200 h-[550px] w-[400px]">
             <figure><img src={image} className="w-[425px] h-[300px]" alt="Shoes" /></figure>
-            <div className="card-body text-center ">
-                <h2 className="card-title flex justify-center"> {name}</h2>
+            <div className="card-body  ">
+                <h2 className="card-title flex flex-col items-center"> {name}</h2>
                 <p>{recipe}</p>
 
             </div>
