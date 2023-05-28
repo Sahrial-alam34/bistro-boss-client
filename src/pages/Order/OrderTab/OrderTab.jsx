@@ -5,6 +5,13 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 
 const OrderTab = ({ items }) => {
+    console.log('items', items.length);
+//   {
+//     const itemsPerPage = 6;
+//     const totalPages = Math.ceil(items/ itemsPerPage);
+
+//     const pageNumbers = [...Array(totalPages).keys()]
+//   }
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
