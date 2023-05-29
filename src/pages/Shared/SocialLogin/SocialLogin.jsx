@@ -5,12 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 const SocialLogin = () => {
-
     const { googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || "/";
+
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
@@ -26,13 +26,11 @@ const SocialLogin = () => {
                 })
                     .then(res => res.json())
                     .then(() => {
-                        
-                            navigate(from, { replace: true });
-
+                        navigate(from, { replace: true });
                     })
-                
             })
     }
+
     return (
         <div>
             <div className="divider"></div>
