@@ -4,37 +4,54 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 
 const SignUp = () => {
-    const { register,reset ,handleSubmit, formState: { errors } } = useForm();
-    const {createUser,updateUserProfile} = useContext(AuthContext);
+    const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onSubmit = data => {
-        console.log(data);
+        //  console.log(data);
         createUser(data.email, data.password)
-        .then(result =>{
-            const loggedUser = result.user;
-            console.log(loggedUser)
-            updateUserProfile(data.name, data.photoURL)
-            .then(()=>{
-                console.log('user profile info update')
-                reset();
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User created successfully.',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  navigate('/')
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        //console.log('user profile info update')
+
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/')
+
+                                }
+                            })
+
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
             })
-            .catch((error)=>{
-                console.log(error)
-            })
-        })
     }
 
 
@@ -56,7 +73,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" placeholder="Name" {...register("name", { required: true })}  className="input input-bordered" />
+                                <input type="text" placeholder="Name" {...register("name", { required: true })} className="input input-bordered" />
                                 {errors.name && <span className="text-red-600">Name is required</span>}
                             </div>
                             <div className="form-control">
@@ -70,7 +87,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" {...register("email", { required: true })}  className="input input-bordered" />
+                                <input type="email" placeholder="email" {...register("email", { required: true })} className="input input-bordered" />
                                 {errors.email && <span className="text-red-600">Email is required</span>}
                             </div>
                             <div className="form-control">
@@ -82,7 +99,7 @@ const SignUp = () => {
                                     minLength: 6,
                                     maxLength: 20,
                                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
-                                })}  className="input input-bordered" />
+                                })} className="input input-bordered" />
                                 {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                                 {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                                 {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be Less Than 20 characters</p>}
@@ -98,6 +115,7 @@ const SignUp = () => {
                             </div>
                         </form>
                         <p><small>Already have an account?? <Link to="/login">Login</Link></small></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

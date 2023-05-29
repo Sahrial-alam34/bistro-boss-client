@@ -11,7 +11,10 @@ const OrderTab = ({ items }) => {
 //     const totalPages = Math.ceil(items/ itemsPerPage);
 
 //     const pageNumbers = [...Array(totalPages).keys()]
+
 //   }
+
+// TODO : pagination
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
