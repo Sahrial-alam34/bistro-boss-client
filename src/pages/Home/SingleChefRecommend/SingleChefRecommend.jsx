@@ -1,7 +1,7 @@
 
 
 const SingleChefRecommend = ({ item }) => {
-    console.log(item)
+   // console.log(item)
     const { name, image, recipe } = item;
     return (
         <div className="bg-base-200 h-[550px] w-[400px]">
