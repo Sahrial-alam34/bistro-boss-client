@@ -13,7 +13,7 @@ import doubleIcon from '../../../assets/home/doubleComma.png'
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/reviews')
+        fetch('https://bistro-boss-server-beryl-kappa.vercel.app/reviews')
         .then(res => res.json())
         .then(data => setReviews(data))
     },[])
